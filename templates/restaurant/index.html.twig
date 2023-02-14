@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RestaurantController!{% endblock %}
+
+{% block body %}
+{% for restaurant in restaurants %}
+            <tr>
+                <td>{{ restaurant.nom }}</td>
+                <td>{{ restaurant.type }}</td>
+                <td>{{ restaurant.adresse }}</td>
+                <td>{{ restaurant.ville }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+{% endblock %}
