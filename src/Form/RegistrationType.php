@@ -121,7 +121,7 @@ class RegistrationType extends AbstractType
             ->add('typeCompte', ChoiceType::class, [
                 'choices'  => [
                     'Client' => 'ROLE_CLIENT',
-                    'Livreur' => 'ROLE_LIVREUR',
+                    'Livreur' => 'ROLE_LIVREUR', 
                     'Restaurateur' => 'ROLE_RESTAURATEUR',
                 ],
                 'mapped' => false, 'required' => true
