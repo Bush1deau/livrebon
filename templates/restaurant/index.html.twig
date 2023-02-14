@@ -10,12 +10,15 @@
                 <td>{{ restaurant.adresse }}</td>
                 <td>{{ restaurant.ville }}</td>
             </tr>
-            <a href="{{ path('id-restaurant', {'id': restaurant.id}) }}">show</a>
+            <a href="{{ path('id-restaurant', {'id': restaurant.id}) }}">Afficher restaurant</a>
+            <a href="{{ path('edit_restaurant', {'id': restaurant.id}) }}">Modifier restaurant</a>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
+
+        <a href="{{ path('new-restaurant') }}">Create new</a>
 
 {% endblock %}
     

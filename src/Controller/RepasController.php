@@ -50,7 +50,7 @@ class RepasController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="id-repas", methods={"GET"})
+     * @Route("repas/{id}", name="id-repas", methods={"GET"})
      */
     public function show(Repas $repas): Response
     {
@@ -61,7 +61,7 @@ class RepasController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="edit_repas", methods={"GET", "POST"})
+     * @Route("repas/{id}/edit", name="edit_repas", methods={"GET", "POST"})
      */
     public function edit(Request $request, Repas $repas, RepasRepository $repasRepository): Response
     {
@@ -75,6 +75,7 @@ class RepasController extends AbstractController
         }
 
         return $this->renderForm('repas/edit.html.twig', [
+            'repas' => $repas,
             'form' => $form,
         ]);
     }
