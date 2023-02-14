@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Entity\Restaurant;
 
 class RestaurantType extends AbstractType
 {
@@ -14,7 +15,6 @@ class RestaurantType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'required' => true,
-                'constraints' => [new Length(['min' => 3, 'minMessage' => 'Le non doit comporter 3 caractères minimum'])],
             ])
 
             ->add('type', TextType::class, [
@@ -33,7 +33,7 @@ class RestaurantType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Restaurant::class,
         ]);
     }
 }
