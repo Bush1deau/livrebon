@@ -20,7 +20,7 @@ class DetailsCommande
     /**
      * @ORM\Column(type="integer")
      */
-    private $quantité;
+    private $quantite;
 
     /**
      * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="details")
@@ -37,14 +37,14 @@ class DetailsCommande
         return $this->id;
     }
 
-    public function getQuantité(): ?int
+    public function getQuantite(): ?int
     {
-        return $this->quantité;
+        return $this->quantite;
     }
 
-    public function setQuantité(int $quantité): self
+    public function setQuantite(int $quantite): self
     {
-        $this->quantité = $quantité;
+        $this->quantite = $quantite;
 
         return $this;
     }
