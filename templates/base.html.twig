@@ -25,24 +25,75 @@
 				<a class="nav-link active" href="/"><img height="70px" width="70px;" src="{{asset('Livrebon.png')}}"></img></a>
 				<div class="collapse navbar-collapse" id="navbarColor03">
 					<ul class="navbar-nav me-auto">
-						{% if is_granted("ROLE_CLIENT") %}
-							<li class="nav-item">
-								<a class="nav-link" href="{{ path('medecin_add') }}">Demande de livraison</a>
-							</li>
-
+                        
+                        
+                        
+                        
+                        
+                        {% if is_granted("ROLE_CLIENT") %}
+                            <li class="nav-item">
+							    <a class="nav-link" href="/restaurant">Restaurant</a>
+						    </li>
+                            <li class="nav-item">
+							    <a class="nav-link" href="/restaurant">Demande de livraison</a>
+						    </li>
 						{% endif %}
-						<li class="nav-item">
-							<a class="nav-link" href="#">Restaurant</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/login">Connexion</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/register">Inscription</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/logout">Déconnexion</a>
-						</li>
+						
+                        
+
+
+                        {% if is_granted("ROLE_LIVREUR") %}
+							<li class="nav-item">
+							<a class="nav-link" href="/logout">Demande de livraison</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/restaurant">Restaurant</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/logout">Commandes</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/logout">Commandes en attente</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/logout">Profil</a>
+						    </li>
+						{% endif %}
+
+
+                        {% if is_granted("ROLE_RESTAURATEUR") %}
+							
+                            <li class="nav-item">
+							<a class="nav-link" href="/restaurant">Ajouter un restaurant</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/logout">Ajouter des plats</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/logout">Mes restaurants</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/logout">Mes plats</a>
+						    </li>
+                            <li class="nav-item">
+							<a class="nav-link" href="/logout">Mes commandes</a>
+						    </li>
+						{% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li class="nav-item">
+							    <a class="nav-link" href="/logout">Déconnexion</a>
+						    </li>
+
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Connexion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Inscription</a>
+                            </li>
+						{% endif %}
+						
+						
 					</ul>
 				</div>
 			</div>
