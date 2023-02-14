@@ -80,4 +80,16 @@ class RepasController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("repas/{id}", name="delete_repas", methods={"POST"})
+     */
+    public function delete(Request $request, Repas $repas, RepasRepository $repasRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$repas->getId(), $request->request->get('_token'))) {
+            $repasRepository->remove($repas, true);
+        }
+
+        return $this->redirectToRoute('repas', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

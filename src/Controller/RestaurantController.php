@@ -81,5 +81,17 @@ class RestaurantController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("restaurant/{id}", name="delete_restaurant", methods={"POST"})
+     */
+    public function delete(Request $request, Restaurant $restaurant, RestaurantRepository $restaurantRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$restaurant->getId(), $request->request->get('_token'))) {
+            $restaurantRepository->remove($restaurant, true);
+        }
+
+        return $this->redirectToRoute('restaurant', [], Response::HTTP_SEE_OTHER);
+    }
+
 
 }
