@@ -3,7 +3,7 @@
 {% block title %}Hello RestaurantController!{% endblock %}
 
 {% block body %}
-{% for restaurant in restaurants %}
+        {% for restaurant in restaurants %}
             <tr>
                 <td>{{ restaurant.nom }}</td>
                 <td>{{ restaurant.type }}</td>
@@ -15,5 +15,6 @@
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
+
     <a href="{{ path('new-restaurant') }}">Create new</a>
 {% endblock %}
