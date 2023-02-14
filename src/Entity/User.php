@@ -63,25 +63,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lier;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="Choisis")
-     */
-    private $Choisis;
+ 
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="commander")
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user")
      */
-    private $commander;
+    private $commandes;
 
     /**
      * @ORM\OneToMany(targetEntity=Livraison::class, mappedBy="livrer")
      */
     private $livrer;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Restaurant::class, mappedBy="proprietaire", cascade={"persist", "remove"})
+     */
+    private $restaurant;
+
     public function __construct()
     {
-        $this->commander = new ArrayCollection();
         $this->livrer = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,47 +235,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getChoisis(): ?Restaurant
-    {
-        return $this->Choisis;
-    }
-
-    public function setChoisis(?Restaurant $Choisis): self
-    {
-        $this->Choisis = $Choisis;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommander(): Collection
-    {
-        return $this->commander;
-    }
-
-    public function addCommander(Commande $commander): self
-    {
-        if (!$this->commander->contains($commander)) {
-            $this->commander[] = $commander;
-            $commander->setCommander($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommander(Commande $commander): self
-    {
-        if ($this->commander->removeElement($commander)) {
-            // set the owning side to null (unless already changed)
-            if ($commander->getCommander() === $this) {
-                $commander->setCommander(null);
-            }
-        }
-
-        return $this;
-    }
+  
 
     /**
      * @return Collection<int, Livraison>
@@ -299,6 +261,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($livrer->getLivrer() === $this) {
                 $livrer->setLivrer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($restaurant === null && $this->restaurant !== null) {
+            $this->restaurant->setProprietaire(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($restaurant !== null && $restaurant->getProprietaire() !== $this) {
+            $restaurant->setProprietaire($this);
+        }
+
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getUser() === $this) {
+                $commande->setUser(null);
             }
         }
 

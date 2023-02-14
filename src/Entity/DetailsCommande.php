@@ -23,14 +23,14 @@ class DetailsCommande
     private $quantité;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="possede")
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="details")
      */
-    private $possede;
+    private $commande;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Repas::class, inversedBy="contient")
+     * @ORM\ManyToOne(targetEntity=Repas::class, inversedBy="detailscommandes")
      */
-    private $contient;
+    private $repas;
 
     public function getId(): ?int
     {
@@ -49,27 +49,29 @@ class DetailsCommande
         return $this;
     }
 
-    public function getPossede(): ?Commande
+    public function getCommande(): ?Commande
     {
-        return $this->possede;
+        return $this->commande;
     }
 
-    public function setPossede(?Commande $possede): self
+    public function setCommande(?Commande $commande): self
     {
-        $this->possede = $possede;
+        $this->commande = $commande;
 
         return $this;
     }
 
-    public function getContient(): ?Repas
+    public function getRepas(): ?Repas
     {
-        return $this->contient;
+        return $this->repas;
     }
 
-    public function setContient(?Repas $contient): self
+    public function setRepas(?Repas $repas): self
     {
-        $this->contient = $contient;
+        $this->repas = $repas;
 
         return $this;
     }
+
+  
 }

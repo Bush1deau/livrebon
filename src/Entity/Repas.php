@@ -40,18 +40,18 @@ class Repas
     private $stock;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="propose")
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="repas")
      */
-    private $propose;
+    private $restaurant;
 
     /**
-     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="contient")
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="repas")
      */
-    private $contient;
+    private $detailscommandes;
 
     public function __construct()
     {
-        $this->contient = new ArrayCollection();
+        $this->detailscommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,14 +107,14 @@ class Repas
         return $this;
     }
 
-    public function getPropose(): ?Restaurant
+    public function getRestaurant(): ?Restaurant
     {
-        return $this->propose;
+        return $this->restaurant;
     }
 
-    public function setPropose(?Restaurant $propose): self
+    public function setRestaurant(?Restaurant $restaurant): self
     {
-        $this->propose = $propose;
+        $this->restaurant = $restaurant;
 
         return $this;
     }
@@ -122,30 +122,33 @@ class Repas
     /**
      * @return Collection<int, DetailsCommande>
      */
-    public function getContient(): Collection
+    public function getDetailscommandes(): Collection
     {
-        return $this->contient;
+        return $this->detailscommandes;
     }
 
-    public function addContient(DetailsCommande $contient): self
+    public function addDetailscommande(DetailsCommande $detailscommande): self
     {
-        if (!$this->contient->contains($contient)) {
-            $this->contient[] = $contient;
-            $contient->setContient($this);
+        if (!$this->detailscommandes->contains($detailscommande)) {
+            $this->detailscommandes[] = $detailscommande;
+            $detailscommande->setRepas($this);
         }
 
         return $this;
     }
 
-    public function removeContient(DetailsCommande $contient): self
+    public function removeDetailscommande(DetailsCommande $detailscommande): self
     {
-        if ($this->contient->removeElement($contient)) {
+        if ($this->detailscommandes->removeElement($detailscommande)) {
             // set the owning side to null (unless already changed)
-            if ($contient->getContient() === $this) {
-                $contient->setContient(null);
+            if ($detailscommande->getRepas() === $this) {
+                $detailscommande->setRepas(null);
             }
         }
 
         return $this;
     }
+
+
+  
 }

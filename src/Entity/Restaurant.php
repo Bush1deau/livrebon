@@ -39,31 +39,33 @@ class Restaurant
      */
     private $ville;
 
-    /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="Choisis")
-     */
-    private $Choisis;
+ 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="seSitue")
+     * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="restaurants")
      */
-    private $seSitue;
+    private $secteur;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="affecter")
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="restaurant")
      */
-    private $affecter;
+    private $commandes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Repas::class, mappedBy="propose")
+     * @ORM\OneToMany(targetEntity=Repas::class, mappedBy="restaurant")
      */
-    private $propose;
+    private $repas;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="restaurant", cascade={"persist", "remove"})
+     */
+    private $proprietaire;
 
     public function __construct()
     {
-        $this->Choisis = new ArrayCollection();
-        $this->affecter = new ArrayCollection();
-        $this->propose = new ArrayCollection();
+
+        $this->commandes = new ArrayCollection();
+        $this->repas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,44 +121,26 @@ class Restaurant
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getChoisis(): Collection
+    public function getProprietaire(): ?User
     {
-        return $this->Choisis;
+        return $this->proprietaire;
     }
 
-    public function addChoisi(User $choisi): self
+    public function setProprietaire(?User $proprietaire): self
     {
-        if (!$this->Choisis->contains($choisi)) {
-            $this->Choisis[] = $choisi;
-            $choisi->setChoisis($this);
-        }
+        $this->proprietaire = $proprietaire;
 
         return $this;
     }
 
-    public function removeChoisi(User $choisi): self
+    public function getSecteur(): ?Secteur
     {
-        if ($this->Choisis->removeElement($choisi)) {
-            // set the owning side to null (unless already changed)
-            if ($choisi->getChoisis() === $this) {
-                $choisi->setChoisis(null);
-            }
-        }
-
-        return $this;
+        return $this->secteur;
     }
 
-    public function getSeSitue(): ?Secteur
+    public function setSecteur(?Secteur $secteur): self
     {
-        return $this->seSitue;
-    }
-
-    public function setSeSitue(?Secteur $seSitue): self
-    {
-        $this->seSitue = $seSitue;
+        $this->secteur = $secteur;
 
         return $this;
     }
@@ -164,27 +148,27 @@ class Restaurant
     /**
      * @return Collection<int, Commande>
      */
-    public function getAffecter(): Collection
+    public function getCommandes(): Collection
     {
-        return $this->affecter;
+        return $this->commandes;
     }
 
-    public function addAffecter(Commande $affecter): self
+    public function addCommande(Commande $commande): self
     {
-        if (!$this->affecter->contains($affecter)) {
-            $this->affecter[] = $affecter;
-            $affecter->setAffecter($this);
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setRestaurant($this);
         }
 
         return $this;
     }
 
-    public function removeAffecter(Commande $affecter): self
+    public function removeCommande(Commande $commande): self
     {
-        if ($this->affecter->removeElement($affecter)) {
+        if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)
-            if ($affecter->getAffecter() === $this) {
-                $affecter->setAffecter(null);
+            if ($commande->getRestaurant() === $this) {
+                $commande->setRestaurant(null);
             }
         }
 
@@ -194,30 +178,36 @@ class Restaurant
     /**
      * @return Collection<int, Repas>
      */
-    public function getPropose(): Collection
+    public function getRepas(): Collection
     {
-        return $this->propose;
+        return $this->repas;
     }
 
-    public function addPropose(Repas $propose): self
+    public function addRepa(Repas $repa): self
     {
-        if (!$this->propose->contains($propose)) {
-            $this->propose[] = $propose;
-            $propose->setPropose($this);
+        if (!$this->repas->contains($repa)) {
+            $this->repas[] = $repa;
+            $repa->setRestaurant($this);
         }
 
         return $this;
     }
 
-    public function removePropose(Repas $propose): self
+    public function removeRepa(Repas $repa): self
     {
-        if ($this->propose->removeElement($propose)) {
+        if ($this->repas->removeElement($repa)) {
             // set the owning side to null (unless already changed)
-            if ($propose->getPropose() === $this) {
-                $propose->setPropose(null);
+            if ($repa->getRestaurant() === $this) {
+                $repa->setRestaurant(null);
             }
         }
 
         return $this;
     }
+
+   
+
+  
+
+   
 }

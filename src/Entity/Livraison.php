@@ -55,18 +55,18 @@ class Livraison
     private $livrer;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="concerne")
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="livraison")
      */
-    private $concerne;
+    private $commandes;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="etRatacher")
+     * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="livraisons")
      */
-    private $etRatacher;
+    private $secteur;
 
     public function __construct()
     {
-        $this->concerne = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,42 +161,46 @@ class Livraison
     /**
      * @return Collection<int, Commande>
      */
-    public function getConcerne(): Collection
+    public function getCommandes(): Collection
     {
-        return $this->concerne;
+        return $this->commandes;
     }
 
-    public function addConcerne(Commande $concerne): self
+    public function addCommande(Commande $commande): self
     {
-        if (!$this->concerne->contains($concerne)) {
-            $this->concerne[] = $concerne;
-            $concerne->setConcerne($this);
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setLivraison($this);
         }
 
         return $this;
     }
 
-    public function removeConcerne(Commande $concerne): self
+    public function removeCommande(Commande $commande): self
     {
-        if ($this->concerne->removeElement($concerne)) {
+        if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)
-            if ($concerne->getConcerne() === $this) {
-                $concerne->setConcerne(null);
+            if ($commande->getLivraison() === $this) {
+                $commande->setLivraison(null);
             }
         }
 
         return $this;
     }
 
-    public function getEtRatacher(): ?Secteur
+    public function getSecteur(): ?Secteur
     {
-        return $this->etRatacher;
+        return $this->secteur;
     }
 
-    public function setEtRatacher(?Secteur $etRatacher): self
+    public function setSecteur(?Secteur $secteur): self
     {
-        $this->etRatacher = $etRatacher;
+        $this->secteur = $secteur;
 
         return $this;
     }
+
+   
+
+   
 }

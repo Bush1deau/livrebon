@@ -25,28 +25,28 @@ class Commande
     private $status = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commander")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commandes")
      */
-    private $commander;
+    private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Livraison::class, inversedBy="concerne")
+     * @ORM\ManyToOne(targetEntity=Livraison::class, inversedBy="commandes")
      */
-    private $concerne;
+    private $livraison;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="affecter")
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="commandes")
      */
-    private $affecter;
+    private $restaurant;
 
     /**
-     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="possede")
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="commande")
      */
-    private $possede;
+    private $details;
 
     public function __construct()
     {
-        $this->possede = new ArrayCollection();
+        $this->details = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -66,38 +66,38 @@ class Commande
         return $this;
     }
 
-    public function getCommander(): ?User
+    public function getUser(): ?User
     {
-        return $this->commander;
+        return $this->user;
     }
 
-    public function setCommander(?User $commander): self
+    public function setUser(?User $user): self
     {
-        $this->commander = $commander;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getConcerne(): ?Livraison
+    public function getLivraison(): ?Livraison
     {
-        return $this->concerne;
+        return $this->livraison;
     }
 
-    public function setConcerne(?Livraison $concerne): self
+    public function setLivraison(?Livraison $livraison): self
     {
-        $this->concerne = $concerne;
+        $this->livraison = $livraison;
 
         return $this;
     }
 
-    public function getAffecter(): ?Restaurant
+    public function getRestaurant(): ?Restaurant
     {
-        return $this->affecter;
+        return $this->restaurant;
     }
 
-    public function setAffecter(?Restaurant $affecter): self
+    public function setRestaurant(?Restaurant $restaurant): self
     {
-        $this->affecter = $affecter;
+        $this->restaurant = $restaurant;
 
         return $this;
     }
@@ -105,30 +105,32 @@ class Commande
     /**
      * @return Collection<int, DetailsCommande>
      */
-    public function getPossede(): Collection
+    public function getDetails(): Collection
     {
-        return $this->possede;
+        return $this->details;
     }
 
-    public function addPossede(DetailsCommande $possede): self
+    public function addDetail(DetailsCommande $detail): self
     {
-        if (!$this->possede->contains($possede)) {
-            $this->possede[] = $possede;
-            $possede->setPossede($this);
+        if (!$this->details->contains($detail)) {
+            $this->details[] = $detail;
+            $detail->setCommande($this);
         }
 
         return $this;
     }
 
-    public function removePossede(DetailsCommande $possede): self
+    public function removeDetail(DetailsCommande $detail): self
     {
-        if ($this->possede->removeElement($possede)) {
+        if ($this->details->removeElement($detail)) {
             // set the owning side to null (unless already changed)
-            if ($possede->getPossede() === $this) {
-                $possede->setPossede(null);
+            if ($detail->getCommande() === $this) {
+                $detail->setCommande(null);
             }
         }
 
         return $this;
     }
+
+   
 }
