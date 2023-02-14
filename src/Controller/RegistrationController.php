@@ -24,14 +24,20 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            if ($form->get('typeCompte')->getData()) {
+                $user->setRoles([$form->get('typeCompte')->getData()]);
+            }
+            
+
             $manager->persist($user);
             $manager->flush();
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('index');
         }
         
-        return $this->renderForm('user/register.html.twig', [
+        
+        return $this->render('user/register.html.twig', [
             'controller_name' => 'RegistrationController',
-            'formulaire' => $form
+            'registrationForm' => $form->createView(),
         ]);
         
     }

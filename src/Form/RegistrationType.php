@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -110,15 +112,26 @@ class RegistrationType extends AbstractType
                 ]
             ])
 
-
-
-            
-            ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4' 
+     
+            ->add('typeCompte', ChoiceType::class, [
+                'choices'  => [
+                    'Client' => 'ROLE_CLIENT',
+                    'Livreur' => 'ROLE_LIVREUR',
+                    'Restaurateur' => 'ROLE_RESTAURATEUR',
                 ],
-                'label' => 'Valider'
+                'mapped' => false, 'required' => true
             ])
+
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new Assert\IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
+            ])
+
+                       
         ;
     }
 
