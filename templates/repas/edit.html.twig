@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Repas{% endblock %}
+
+{% block body %}
+    <h1>Edit repas</h1>
+
+    {{ include('repas/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('repas') }}">back to list</a>
+
+{% endblock %}

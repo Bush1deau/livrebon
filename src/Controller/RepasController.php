@@ -52,10 +52,31 @@ class RepasController extends AbstractController
     /**
      * @Route("/{id}", name="id-repas", methods={"GET"})
      */
-    public function show(repas $repas): Response
+    public function show(Repas $repas): Response
     {
         return $this->render('repas/show.html.twig', [
             'repas' => $repas,
         ]);
     }
+
+
+    /**
+     * @Route("/{id}/edit", name="edit_repas", methods={"GET", "POST"})
+     */
+    public function edit(Request $request, Repas $repas, RepasRepository $repasRepository): Response
+    {
+        $form = $this->createForm(RepasType::class, $repas);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repasRepository->add($repas, true);
+
+            return $this->redirectToRoute('repas', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('repas/edit.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
 }

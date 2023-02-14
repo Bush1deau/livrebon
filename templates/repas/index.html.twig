@@ -18,6 +18,7 @@
                 <td>{{ repas.stock }}</td>
             </tr>
             <a href="{{ path('id-repas', {'id': repas.id}) }}">show</a>
+            <a href="{{ path('edit_repas', {'id': repas.id}) }}">edit</a>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
