@@ -64,10 +64,10 @@
                         {% if is_granted("ROLE_RESTAURATEUR") %}
 							
                             <li class="nav-item">
-							<a class="nav-link" href="/restaurant">Ajouter un restaurant</a>
+							<a class="nav-link" href="{{ path('new-restaurant') }}">Ajouter un restaurant</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="/logout">Ajouter des plats</a>
+							<a class="nav-link" href="{{ path('new-repas') }}">Ajouter des plats</a>
 						    </li>
                             <li class="nav-item">
 							<a class="nav-link" href="/logout">Mes restaurants</a>
