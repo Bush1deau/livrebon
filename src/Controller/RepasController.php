@@ -48,4 +48,14 @@ class RepasController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * @Route("/{id}", name="id-repas", methods={"GET"})
+     */
+    public function show(repas $repas): Response
+    {
+        return $this->render('repas/show.html.twig', [
+            'repas' => $repas,
+        ]);
+    }
 }
