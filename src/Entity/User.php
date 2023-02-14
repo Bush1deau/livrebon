@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,6 +57,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $adresse;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="lier")
+     */
+    private $lier;
+
+ 
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user")
+     */
+    private $commandes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Livraison::class, mappedBy="livrer")
+     */
+    private $livrer;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Restaurant::class, mappedBy="proprietaire", cascade={"persist", "remove"})
+     */
+    private $restaurant;
+
+    public function __construct()
+    {
+        $this->livrer = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -189,6 +219,102 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getLier(): ?Secteur
+    {
+        return $this->lier;
+    }
+
+    public function setLier(?Secteur $lier): self
+    {
+        $this->lier = $lier;
+
+        return $this;
+    }
+
+  
+
+    /**
+     * @return Collection<int, Livraison>
+     */
+    public function getLivrer(): Collection
+    {
+        return $this->livrer;
+    }
+
+    public function addLivrer(Livraison $livrer): self
+    {
+        if (!$this->livrer->contains($livrer)) {
+            $this->livrer[] = $livrer;
+            $livrer->setLivrer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLivrer(Livraison $livrer): self
+    {
+        if ($this->livrer->removeElement($livrer)) {
+            // set the owning side to null (unless already changed)
+            if ($livrer->getLivrer() === $this) {
+                $livrer->setLivrer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($restaurant === null && $this->restaurant !== null) {
+            $this->restaurant->setProprietaire(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($restaurant !== null && $restaurant->getProprietaire() !== $this) {
+            $restaurant->setProprietaire($this);
+        }
+
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getUser() === $this) {
+                $commande->setUser(null);
+            }
+        }
 
         return $this;
     }

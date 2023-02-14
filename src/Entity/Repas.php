@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RepasRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,21 @@ class Repas
      * @ORM\Column(type="integer")
      */
     private $stock;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="repas")
+     */
+    private $restaurant;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="repas")
+     */
+    private $detailscommandes;
+
+    public function __construct()
+    {
+        $this->detailscommandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,4 +106,49 @@ class Repas
 
         return $this;
     }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailsCommande>
+     */
+    public function getDetailscommandes(): Collection
+    {
+        return $this->detailscommandes;
+    }
+
+    public function addDetailscommande(DetailsCommande $detailscommande): self
+    {
+        if (!$this->detailscommandes->contains($detailscommande)) {
+            $this->detailscommandes[] = $detailscommande;
+            $detailscommande->setRepas($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailscommande(DetailsCommande $detailscommande): self
+    {
+        if ($this->detailscommandes->removeElement($detailscommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailscommande->getRepas() === $this) {
+                $detailscommande->setRepas(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+  
 }
