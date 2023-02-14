@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LivraisonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,26 @@ class Livraison
      * @ORM\Column(type="string", length=255)
      */
     private $typeVehicule;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="livrer")
+     */
+    private $livrer;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="concerne")
+     */
+    private $concerne;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Secteur::class, inversedBy="etRatacher")
+     */
+    private $etRatacher;
+
+    public function __construct()
+    {
+        $this->concerne = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +142,60 @@ class Livraison
     public function setTypeVehicule(string $typeVehicule): self
     {
         $this->typeVehicule = $typeVehicule;
+
+        return $this;
+    }
+
+    public function getLivrer(): ?User
+    {
+        return $this->livrer;
+    }
+
+    public function setLivrer(?User $livrer): self
+    {
+        $this->livrer = $livrer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getConcerne(): Collection
+    {
+        return $this->concerne;
+    }
+
+    public function addConcerne(Commande $concerne): self
+    {
+        if (!$this->concerne->contains($concerne)) {
+            $this->concerne[] = $concerne;
+            $concerne->setConcerne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConcerne(Commande $concerne): self
+    {
+        if ($this->concerne->removeElement($concerne)) {
+            // set the owning side to null (unless already changed)
+            if ($concerne->getConcerne() === $this) {
+                $concerne->setConcerne(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEtRatacher(): ?Secteur
+    {
+        return $this->etRatacher;
+    }
+
+    public function setEtRatacher(?Secteur $etRatacher): self
+    {
+        $this->etRatacher = $etRatacher;
 
         return $this;
     }
