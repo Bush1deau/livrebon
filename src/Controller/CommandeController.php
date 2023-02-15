@@ -29,7 +29,7 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * @Route("/commandeAdd", name="app_commande_add")
+     * @Route("/commandeAdd", name="commande_add")
      * 
      */
     public function add(Request $request, ManagerRegistry $doctrine, CommandeRepository $commandeRepository, DetailsCommandeRepository $detailsCommandeRepository, LivraisonRepository $livraisonRepository ): Response
