@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CommandeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,12 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/commandes", name="commandeUser")
      */
-    public function index(): Response
+    public function viewCommande(CommandeRepository $commandeRepository): Response
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+        // $commande = $commandeRepository->findCommand();
+        $commande = $commandeRepository->findAll();
+
+        return $this->render('user/commandes.html.twig', [
+            'commande' => $commande
         ]);
     }
 }
