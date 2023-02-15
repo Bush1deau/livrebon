@@ -3,22 +3,71 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
+<link rel="stylesheet" href="/style/register.css">
 <div class="container">
-
 {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.nom) }}
-    {{ form_row(registrationForm.prenom) }}
-    {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.password, {
+<div class="form_wrapper">
+  <div class="form_container">
+    <div class="title_container">
+      <h2>S'inscrire</h2>
+    </div>
+    <div class="row clearfix">
+      <div class="">
+        <form>
+          <div class="input_field"> 
+           {{ form_row(registrationForm.email) }}
+          </div>
+
+          <div class="input_field"> 
+            {{ form_row(registrationForm.password, {
             label: 'Password'
-        }) }}
-    {{ form_row(registrationForm.ville) }}
-    {{ form_row(registrationForm.adresse) }}
-    {{ form_row(registrationForm.typeCompte) }}
-    {{ form_row(registrationForm.agreeTerms) }}
-  <div class="form-label mt-4">
-    <button type="submit" class="btn btn-primary">Sign in</button>
+             }) }}
+          </div>
+
+          
+
+          <div class="row clearfix">
+            <div class="col_half">
+              <div class="input_field"> 
+                {{ form_row(registrationForm.nom) }}
+              </div>
+            </div>
+
+            <div class="col_half">
+              <div class="input_field"> 
+                {{ form_row(registrationForm.prenom) }}
+              </div>
+            </div>
+          </div>
+
+                <div class="input_field"> 
+                 {{ form_row(registrationForm.ville) }}
+                </div>
+
+                <div class="input_field"> 
+                 {{ form_row(registrationForm.adresse) }}
+                </div>
+
+                 <div class="input_field select_option">
+                  {{ form_row(registrationForm.typeCompte) }}  
+                <div class="select_arrow"></div>
+              </div>
+            	
+              
+              
+            <div class="input_field checkbox_option">
+            	 {{ form_widget(registrationForm.agreeTerms) }}
+               {{ form_label(registrationForm.agreeTerms) }}
+    			   
+            </div>
+            
+          <input class="button" type="submit" value="S'inscrire" />
+        </form>
+      </div>
+    </div>
   </div>
+</div>
     {{ form_end(registrationForm) }}
 </div>
+<p class="credit">Développé par <a href="https://www.lyreco.com/webshop/FRFR/index.html" target="_blank">L'équipe JPJ</a></p>
 {% endblock %}
