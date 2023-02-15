@@ -3,6 +3,8 @@
 {% block title %}Hello RestaurantController!{% endblock %}
 
 {% block body %}
+
+    <link rel="stylesheet" href="/style/register.css">
         {% for restaurant in restaurants %}
             <tr>
                 <td>{{ restaurant.nom }}</td>
