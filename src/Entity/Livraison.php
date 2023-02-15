@@ -39,16 +39,7 @@ class Livraison
      */
     private $destination;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $choixRepas;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $typeVehicule;
-
+  
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="livrer")
      */
@@ -122,29 +113,7 @@ class Livraison
         return $this;
     }
 
-    public function getChoixRepas(): ?string
-    {
-        return $this->choixRepas;
-    }
-
-    public function setChoixRepas(string $choixRepas): self
-    {
-        $this->choixRepas = $choixRepas;
-
-        return $this;
-    }
-
-    public function getTypeVehicule(): ?string
-    {
-        return $this->typeVehicule;
-    }
-
-    public function setTypeVehicule(string $typeVehicule): self
-    {
-        $this->typeVehicule = $typeVehicule;
-
-        return $this;
-    }
+   
 
     public function getLivrer(): ?User
     {

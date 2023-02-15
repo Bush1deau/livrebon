@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une commande{% endblock %}
+
+{% block body %}
+    <h1>Passer une commande            </h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.repas) }}
+        {{ form_row(form.quantite) }}
+        {{ form_row(form.dateTime) }}
+        {{ form_row(form.lieu) }}
+        {{ form_row(form.ville) }}
+        <div class="form-label mt-4">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    {{ form_end(form) }}
+
+
+
+{% endblock %}
