@@ -2,6 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
+use App\Entity\DetailsCommande;
+use App\Entity\Repas;
+use App\Repository\RepasRepository;
+use App\Repository\CommandeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,12 +14,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/commandes", name="commandeUser")
      */
-    public function index(): Response
+    public function index(RepasRepository $repasRepository , CommandeRepository $commandeRepository): Response
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+        $commande = new Commande();
+        $detailcmd= new DetailsCommande();
+        $repas =new Repas();
+
+
+
+
+        
+        $quantite = $detailcmd->getQuantite();
+        $tarif = $repas->getTarif();
+
+
+
+
+
+        $prixFinal = intval($tarif) * floatval($quantite);
+        return $this->render('user/commandes.html.twig', [
+            'prixFinal' => $prixFinal,
         ]);
     }
 }
