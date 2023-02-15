@@ -46,7 +46,7 @@ class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $commande = $form->getData();
-            $commande->setStatus(['enAttente']);
+            $commande->setStatus('En Attente');
             $commande->setUser($this->getUser());
 
             $date = $form->get('dateTime')->getData();

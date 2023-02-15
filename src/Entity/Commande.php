@@ -20,9 +20,9 @@ class Commande
     private $id;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string")
      */
-    private $status = [];
+    private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commandes")
@@ -54,12 +54,12 @@ class Commande
         return $this->id;
     }
 
-    public function getStatus(): ?array
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(array $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
