@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commande client{% endblock %}
+{% block title %}Commande des client{% endblock %}
 
 {% block body %}
-    <h1>Commande client</h1>
+    <h1>Commande des clients</h1>
     {% for c in commande %}
 
     <p>Nom du repas : {{c.details[0].repas.nom}}</p>

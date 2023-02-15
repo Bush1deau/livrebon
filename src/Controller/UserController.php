@@ -2,10 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Commande;
-use App\Entity\DetailsCommande;
-use App\Entity\Repas;
-use App\Repository\RepasRepository;
 use App\Repository\CommandeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,26 +12,13 @@ class UserController extends AbstractController
     /**
      * @Route("/commandes", name="commandeUser")
      */
-    public function index(RepasRepository $repasRepository , CommandeRepository $commandeRepository): Response
+    public function viewCommande(CommandeRepository $commandeRepository): Response
     {
-        $commande = new Commande();
-        $detailcmd= new DetailsCommande();
-        $repas =new Repas();
+        // $commande = $commandeRepository->findCommand();
+        $commande = $commandeRepository->findAll();
 
-
-
-
-        
-        $quantite = $detailcmd->getQuantite();
-        $tarif = $repas->getTarif();
-
-
-
-
-
-        $prixFinal = intval($tarif) * floatval($quantite);
         return $this->render('user/commandes.html.twig', [
-            'prixFinal' => $prixFinal,
+            'commande' => $commande
         ]);
     }
 }
