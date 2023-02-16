@@ -47,19 +47,19 @@
 
                         {% if is_granted("ROLE_LIVREUR") %}
 							<li class="nav-item">
-							<a class="nav-link" href="/logout">Demande de livraison</a>
+							<a class="nav-link" href="">Demande de livraison</a>
 						    </li>
                             <li class="nav-item">
 							<a class="nav-link" href="/restaurant">Restaurant</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="/logout">Commandes</a>
+							<a class="nav-link" href="">Commandes</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="/logout">Commandes en attente</a>
+							<a class="nav-link" href="">Commandes en attente</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="/logout">Profil</a>
+							<a class="nav-link" href="">Profil</a>
 						    </li>
 						{% endif %}
 
@@ -73,10 +73,10 @@
 							<a class="nav-link" href="{{ path('new-repas') }}">Ajouter des plats</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="/logout">Mes restaurants</a>
+							<a class="nav-link" href="">Mes restaurants</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="/logout">Mes plats</a>
+							<a class="nav-link" href="">Mes plats</a>
 						    </li>
                             <li class="nav-item">
 							<a class="nav-link" href="{{ path('restaurantCmd') }}">Mes commandes</a>

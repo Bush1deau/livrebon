@@ -60,6 +60,8 @@
                {{ form_label(registrationForm.agreeTerms) }}
     			   
             </div>
+
+            {{form_widget(registrationForm._token)}} 
             
           <input class="button" type="submit" value="S'inscrire" />
         </form>

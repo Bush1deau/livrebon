@@ -13,6 +13,7 @@ use App\Repository\CommandeRepository;
 use App\Repository\DetailsCommandeRepository;
 use App\Repository\LivraisonRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -30,6 +31,7 @@ class CommandeController extends AbstractController
 
     /**
      * @Route("/commandeAdd", name="commande_add")
+     * @IsGranted("ROLE_CLIENT")
      * 
      */
     public function add(Request $request, ManagerRegistry $doctrine, CommandeRepository $commandeRepository, DetailsCommandeRepository $detailsCommandeRepository, LivraisonRepository $livraisonRepository ): Response
@@ -48,6 +50,7 @@ class CommandeController extends AbstractController
             $commande = $form->getData();
             $commande->setStatus('En Attente');
             $commande->setUser($this->getUser());
+            $commande->setRestaurant($form->get('repas')->getData()->getRestaurant());
 
             $date = $form->get('dateTime')->getData();
            
@@ -64,20 +67,29 @@ class CommandeController extends AbstractController
 
             $detailcmd->setQuantite($form->get('quantite')->getData());
             $detailcmd->setRepas($form->get('repas')->getData());
+         
             $detailcmd->setCommande($commande);
             $manager->persist($detailcmd);
             
             $manager->flush();
         }
 
-
-        //  on recupere le repas > resto
-        // on cree le detail commande 
-        // cree un objet livraison > date , heure, lieu , 
-
-
         return $this->renderForm('commande/add.html.twig', [
             'form' => $form
+        ]);
+    }
+
+    /**
+     * @Route("/viewCommande", name="view_commande")
+     * @IsGranted("ROLE_CLIENT")
+     */
+    public function viewCommande(CommandeRepository $commandeRepository): Response
+    {
+        // $commande = $commandeRepository->findCommand();
+        $commande = $commandeRepository->findAll();
+
+        return $this->render('commande/view.html.twig', [
+            'commande' => $commande
         ]);
     }
 }

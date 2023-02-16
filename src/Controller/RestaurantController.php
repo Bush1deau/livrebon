@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\RestaurantType;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\CommandeRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class RestaurantController extends AbstractController
 {
@@ -28,6 +29,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/restaurant/new", name="new-restaurant", methods={"GET", "POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function new(Request $request, RestaurantRepository $restaurantRepository, ManagerRegistry $doctrine): Response
     {
@@ -39,7 +41,9 @@ class RestaurantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $restaurantRepository->add($restaurant, true);
+
             $restaurant = $form->getData();
+            $restaurant->setProprietaire($this->getUser());
             $manager->persist($restaurant);
             $manager->flush();
 
@@ -53,6 +57,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("restaurant/{id<\d+>}", name="id-restaurant", methods={"GET"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function show(Restaurant $restaurant): Response
     {
@@ -64,6 +69,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("restaurant/{id}/edit", name="edit_restaurant", methods={"GET", "POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function edit(Request $request, Restaurant $restaurant, RestaurantRepository $restaurantRepository): Response
     {
@@ -84,6 +90,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("restaurant/{id}", name="delete_restaurant", methods={"POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function delete(Request $request, Restaurant $restaurant, RestaurantRepository $restaurantRepository): Response
     {
@@ -96,6 +103,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/restaurant/commandes", name="restaurantCmd", methods={"GET"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function viewAll(CommandeRepository $commandeRepository): Response
     {
