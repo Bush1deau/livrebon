@@ -3,15 +3,21 @@
 {% block title %}Commande client{% endblock %}
 
 {% block body %}
-    <h1>Commande client</h1>
-    {% for c in commande %}
-
-    <p>Nom du repas : {{c.details[0].repas.nom}}</p>
-    <p>Quantité : {{c.details[0].quantite}}</p>
-    <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
-    <p>Status de la livraison : {{c.status}} </p>
-    
-
-    {% endfor %}
+    <link rel="stylesheet" href="/style/register.css">
+    <div class="form_wrapper">
+        <div class="form_container">
+             <div class="centre">
+            <h1>Commande client</h1>
+            {% for c in commande %}
+            <br>
+            <p>Nom du repas : {{c.details[0].repas.nom}}</p>
+            <p>Quantité : {{c.details[0].quantite}}</p>
+            <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
+            <p>Status de la livraison : {{c.status}} </p>
+            <hr> <br>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

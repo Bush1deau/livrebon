@@ -11,17 +11,24 @@
             </center>
 
             {{ form_start(form) }}
-                <div class="input_field"> 
-                    {{ form_row(form.repas) }}
-                </div>
 
-                <div class="input_field"> 
-                    {{ form_row(form.quantite) }}
-                </div>
+                <div class="centre">
+                    <div class="input_field"> 
+                        {{ form_label(form.repas) }}
+                        <br>
+                        {{ form_widget(form.repas) }}
+                    </div>
 
-                 <div class="input_field"> 
-                    {{ form_row(form.dateTime) }}
-                </div>
+                    <div class="input_field"> 
+                        {{ form_label(form.quantite) }}
+                        <br>
+                        {{ form_widget(form.quantite)}}
+                    </div>
+
+                    <div class="input_field"> 
+                        {{ form_row(form.dateTime) }}
+                    </div>
+                
 
                  <div class="input_field"> 
                     {{ form_row(form.lieu) }}
@@ -30,6 +37,8 @@
                  <div class="input_field"> 
                     {{ form_row(form.ville) }}
                  </div>
+
+                </div>
 
                 <div class="group-btn">
                     <button type="submit" class="btn">Commander</button>
