@@ -60,7 +60,7 @@ class RepasController extends AbstractController
             $manager->persist($repas);
             $manager->flush();
 
-            return $this->redirectToRoute('repas', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('repasResto', ["id" => $repas->getRestaurant()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('repas/new.html.twig', [
@@ -92,7 +92,7 @@ class RepasController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $repasRepository->add($repas, true);
 
-            return $this->redirectToRoute('repas', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('repasResto', ["id" => $repas->getRestaurant()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('repas/edit.html.twig', [
@@ -111,7 +111,7 @@ class RepasController extends AbstractController
             $repasRepository->remove($repas, true);
         }
 
-        return $this->redirectToRoute('repas', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('repasResto', ["id" => $repas->getRestaurant()->getId()], Response::HTTP_SEE_OTHER);
     }
 
 }
