@@ -3,11 +3,22 @@
 {% block title %}Commande des client{% endblock %}
 
 {% block body %}
-    <h1>Modifier le status de la commande</h1>
-    {{ form_start(form) }}
-    {{ form_row(form.status) }}
+<link rel="stylesheet" href="/style/register.css">
+    <div class="form_wrapper">
+        <div class="form_container">
+            <div class="centre">
+                <h1>Modifier le status de la commande</h1>
+                <br><br>
+                {{ form_start(form) }}
+                {{ form_label(form.status) }}
+                <br>
+                {{ form_widget(form.status) }}
+                <br><br>
 
-{{ form_row(form.btn) }}
-{{ form_end(form) }}
+            {{ form_row(form.btn) }}
+            {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
