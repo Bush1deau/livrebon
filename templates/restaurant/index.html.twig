@@ -1,26 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RestaurantController!{% endblock %}
+{% block title %}Livré'Bon{% endblock %}
 
 {% block body %}
 
     <link rel="stylesheet" href="/style/register.css">
-        {% for restaurant in restaurants %}
-            <tr>
-                <td>{{ restaurant.nom }}</td>
-                <td>{{ restaurant.type }}</td>
-                <td>{{ restaurant.adresse }}</td>
-                <td>{{ restaurant.ville }}</td>
-            </tr>
-            <a href="{{ path('id-restaurant', {'id': restaurant.id}) }}">Afficher restaurant</a>
-            <a href="{{ path('edit_restaurant', {'id': restaurant.id}) }}">Modifier restaurant</a>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-
-        <a href="{{ path('new-restaurant') }}">Create new</a>
+    <div class="form_wrapper">
+        <div class="form_container">
+            <div class="centre">
+            {% for restaurant in restaurants %}
+                <tr>
+                    <td>{{ restaurant.nom }}</td>
+                    <br>
+                    <td>{{ restaurant.type }}</td>
+                    <br>
+                    <td>{{ restaurant.adresse }}</td>
+                    <br>
+                    <td>{{ restaurant.ville }}</td>
+                    <br>
+                </tr>
+                <div class="divRetour">
+                    <a href="{{ path('id-restaurant', {'id': restaurant.id}) }}"class="btn-retour">Afficher le restaurant</a>
+                </div>
+                    
+                <div class="divRetour">
+                    <a href="{{ path('edit_restaurant', {'id': restaurant.id}) }}"class="btn-retour">Modifier le restaurant</a>
+                    <br>
+                </div>
+            {% else %}
+                <tr>
+                    <td colspan="4">No</td>
+                </tr>
+            {% endfor %}
+                <div class="divRetour">
+                    <a href="{{ path('new-restaurant') }}" class="btn-retour">Ajouter un nouveau Restaurant</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
     

@@ -1,13 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Restaurant{% endblock %}
+{% block title %}Livré'Bon{% endblock %}
 
 {% block body %}
     <link rel="stylesheet" href="/style/register.css">
-    
-    <h1>Create new Restaurant</h1>
 
-    {{ include('restaurant/_form.html.twig') }}
+    <div class="form_wrapper">
+        <div class="form_container">
 
-    <a href="{{ path('restaurant') }}">back to list</a>
+            <center>
+                 <h1>Créer un nouveau Restaurant</h1>
+            </center>
+
+            <div class="group-btn">
+              {{ include('restaurant/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+            </div>
+
+            <div class="divRetour">
+                <a href="{{ path('restaurant') }}" class="btn-retour">Retour</a>
+            </div>
+            
+        </div>
+    </div
 {% endblock %}

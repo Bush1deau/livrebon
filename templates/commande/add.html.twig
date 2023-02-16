@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une commande{% endblock %}
+{% block title %}Livré'Bon{% endblock %}
 
 {% block body %}
-    <h1>Passer une commande            </h1>
+<link rel="stylesheet" href="/style/register.css">
+<div class="form_wrapper">
+        <div class="form_container">
+            <center> 
+                <h1>Passer une commande</h1>
+            </center>
 
-    {{ form_start(form) }}
-        {{ form_row(form.repas) }}
-        {{ form_row(form.quantite) }}
-        {{ form_row(form.dateTime) }}
-        {{ form_row(form.lieu) }}
-        {{ form_row(form.ville) }}
-        <div class="form-label mt-4">
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            {{ form_start(form) }}
+                <div class="input_field"> 
+                    {{ form_row(form.repas) }}
+                </div>
+
+                <div class="input_field"> 
+                    {{ form_row(form.quantite) }}
+                </div>
+
+                 <div class="input_field"> 
+                    {{ form_row(form.dateTime) }}
+                </div>
+
+                 <div class="input_field"> 
+                    {{ form_row(form.lieu) }}
+                </div>
+
+                 <div class="input_field"> 
+                    {{ form_row(form.ville) }}
+                 </div>
+
+                <div class="group-btn">
+                    <button type="submit" class="btn">Commander</button>
+                </div>
+            {{ form_end(form) }}
         </div>
-    {{ form_end(form) }}
+</div>
 
 
 
