@@ -21,8 +21,9 @@ class StatusType extends AbstractType
                 'Prête' => 'Prête',
             ],
         ])
-        ->add('btn', SubmitType::class)
-        ;
+        ->add('btn', SubmitType::class , [
+            'label' => 'Changer',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
