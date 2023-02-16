@@ -40,8 +40,11 @@ class RepasController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repasRepository->add($repas, true);
+
             $repas->setRestaurant($this->getUser()->getRestaurant());
+            
             $repas = $form->getData();
+
             $manager->persist($repas);
             $manager->flush();
 

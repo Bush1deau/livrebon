@@ -31,7 +31,6 @@ class CommandeController extends AbstractController
 
     /**
      * @Route("/commandeAdd", name="commande_add")
-     * @IsGranted("ROLE_CLIENT")
      * 
      */
     public function add(Request $request, ManagerRegistry $doctrine, CommandeRepository $commandeRepository, DetailsCommandeRepository $detailsCommandeRepository, LivraisonRepository $livraisonRepository ): Response

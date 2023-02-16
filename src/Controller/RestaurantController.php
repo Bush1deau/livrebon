@@ -42,6 +42,7 @@ class RestaurantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $restaurantRepository->add($restaurant, true);
 
+            
             $restaurant = $form->getData();
             $restaurant->setProprietaire($this->getUser());
             $manager->persist($restaurant);

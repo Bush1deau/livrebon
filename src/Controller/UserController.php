@@ -12,7 +12,6 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/commandes", name="commandeUser")
-     * @IsGranted("ROLE_CLIENT")
      */
     public function viewCommande(CommandeRepository $commandeRepository): Response
     {
