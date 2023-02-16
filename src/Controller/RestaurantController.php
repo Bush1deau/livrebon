@@ -10,6 +10,7 @@ use App\Repository\RestaurantRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RestaurantType;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\CommandeRepository;
 
 class RestaurantController extends AbstractController
 {
@@ -51,7 +52,7 @@ class RestaurantController extends AbstractController
     }
 
     /**
-     * @Route("restaurant/{id}", name="id-restaurant", methods={"GET"})
+     * @Route("restaurant/{id<\d+>}", name="id-restaurant", methods={"GET"})
      */
     public function show(Restaurant $restaurant): Response
     {
@@ -91,6 +92,19 @@ class RestaurantController extends AbstractController
         }
 
         return $this->redirectToRoute('restaurant', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/restaurant/commandes", name="restaurantCmd", methods={"GET"})
+     */
+    public function viewAll(CommandeRepository $commandeRepository): Response
+    {
+       // $commande = $commandeRepository->findCommand();
+       $commande = $commandeRepository->findAll();
+        
+       return $this->render('restaurant/commandes.html.twig', [
+           'commande' => $commande
+       ]);
     }
 
 

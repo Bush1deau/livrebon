@@ -63,8 +63,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lier;
 
- 
-
     /**
      * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user")
      */
@@ -318,4 +316,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }
