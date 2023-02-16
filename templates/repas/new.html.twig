@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Repas{% endblock %}
+{% block title %}Livré'Bon{% endblock %}
 
 {% block body %}
-    <h1>Create new Repas</h1>
+    <link rel="stylesheet" href="/style/register.css">
+     <div class="form_wrapper">
+        <div class="form_container">
+        
+            <center>
+                <h1>Ajouter un nouveau repas</h1>
+            </center>
 
-    {{ include('repas/_form.html.twig') }}
+            <div class="group-btn">
+                {{ include('repas/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+            </div>
 
-    <a href="{{ path('repas') }}">back to list</a>
+            <div class="divRetour">
+                <a href="{{ path('repas') }}" class="btn-retour">Retour</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,32 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Repas{% endblock %}
+{% block title %}Livré'Bon{% endblock %}
 
 {% block body %}
-    <h1>Repas</h1>
+ <link rel="stylesheet" href="/style/register.css">
+    <div class="form_wrapper">
+        <div class="form_container">
+        
+            <center>
+                <h1>Repas</h1>
+            </center>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ repas.nom }}</td>
-            </tr>
-            <tr
-                <th>Type</th>
-                <td>{{ repas.type }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{repas.tarif}}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{repas.stock}}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('repas') }}">back to list</a>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ repas.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ repas.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix</th>
+                            <td>{{repas.tarif}}</td>
+                        </tr>
+                        <tr>
+                            <th>Stock</th>
+                            <td>{{repas.stock}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="divRetour">
+                    <a href="{{ path('repas') }}" class="btn-retour">Retour</a>
+                </div>
+        </div>
+    </div>
 
 
 {% endblock %}
