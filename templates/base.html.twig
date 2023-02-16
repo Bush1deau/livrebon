@@ -32,7 +32,7 @@
                         
                         {% if is_granted("ROLE_CLIENT") %}
                             <li class="nav-item">
-							    <a class="nav-link" href="/restaurant">Restaurant</a>
+							    <a class="nav-link" href="{{ path('restaurant') }}">Restaurant</a>
 						    </li>
                             <li class="nav-item">
 							    <a class="nav-link" href="{{ path('commande_add') }}">Demande de livraison</a>
@@ -73,10 +73,10 @@
 							<a class="nav-link" href="{{ path('new-repas') }}">Ajouter des plats</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="">Mes restaurants</a>
+							<a class="nav-link" href="{{ path('restaurant') }}">Mes restaurants</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="">Mes plats</a>
+							<a class="nav-link" href="{{ path('repas') }}">Mes plats</a>
 						    </li>
                             <li class="nav-item">
 							<a class="nav-link" href="{{ path('restaurantCmd') }}">Mes commandes</a>

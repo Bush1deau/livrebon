@@ -50,7 +50,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         }
 
 
-        return new RedirectResponse($this->urlGenerator->generate('commandeUser'));
+        return new RedirectResponse($this->urlGenerator->generate('restaurant'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

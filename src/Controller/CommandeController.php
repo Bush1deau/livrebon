@@ -72,6 +72,8 @@ class CommandeController extends AbstractController
             $manager->persist($detailcmd);
             
             $manager->flush();
+
+            return $this->redirectToRoute('commandeUser', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('commande/add.html.twig', [
@@ -81,7 +83,6 @@ class CommandeController extends AbstractController
 
     /**
      * @Route("/viewCommande", name="view_commande")
-     * @IsGranted("ROLE_CLIENT")
      */
     public function viewCommande(CommandeRepository $commandeRepository): Response
     {
