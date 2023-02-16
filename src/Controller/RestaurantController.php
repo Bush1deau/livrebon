@@ -57,7 +57,6 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("restaurant/{id<\d+>}", name="id-restaurant", methods={"GET"})
-     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function show(Restaurant $restaurant): Response
     {
