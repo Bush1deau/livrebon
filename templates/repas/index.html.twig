@@ -21,7 +21,7 @@
                                 <td>{{ repas.type }}</td>
                                 <br>
                                 <td>{{ repas.tarif }}</td>€
-                                <br>
+                                <br> 
                                 <td>{{ repas.stock }}</td>
                                 <br>
                             </tr>
@@ -32,6 +32,7 @@
                             <div class="divRetour">
                                 <a href="{{ path('edit_repas', {'id': repas.id}) }}" class="btn-retour">Modifier le repas</a>
                             </div>
+                                <hr>
                         {% else %}
                             <tr>
                                 <td colspan="4">Aucun Repas n'a était ajouter</td>
@@ -40,6 +41,7 @@
                         <div class="divRetour">
                         <a href="{{ path('new-repas') }}" class="btn-retour">Ajouter un nouveau repas</a>
                         </div>
+                        
                     </div>
 
                 </div>

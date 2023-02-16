@@ -22,17 +22,18 @@
                 <div class="divRetour">
                     <a href="{{ path('id-restaurant', {'id': restaurant.id}) }}"class="btn-retour">Afficher le restaurant</a>
                 </div>
+                <hr>
                     
                 {% if is_granted("ROLE_RESTAURATEUR") %}
                     <div class="divRetour">
                         <a href="{{ path('edit_restaurant', {'id': restaurant.id}) }}"class="btn-retour">Modifier le restaurant</a>
-                        <br>
                     </div>
+                <hr>
                 {% endif %}
                 
             {% else %}
                 <tr>
-                    <td colspan="4">No</td>
+                    <td colspan="4">Aucun Restaurant n'a était Ajouté.</td>
                 </tr>
             {% endfor %}
 

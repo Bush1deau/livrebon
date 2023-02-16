@@ -3,17 +3,20 @@
 {% block title %}Commande des client{% endblock %}
 
 {% block body %}
-    <h1>Commande des clients</h1>
-    {% for c in commande %}
+    <link rel="stylesheet" href="/style/register.css">
+    <div class="form_wrapper">
+        <div class="form_container">
+            <h1>Commande des clients</h1>
+            {% for c in commande %}
 
-    <p>Nom du repas : {{c.details[0].repas.nom}}</p>
-    <p>Quantité : {{c.details[0].quantite}}</p>
-    <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
-    <p>Status de la livraison : {{c.status}} </p>
-    <p><a href="{{ path('commandeStatus', {'id': c.id}) }}"class="btn-retour">Modifier le status de la commande</a></p>
-    <br>
-    
-
-    {% endfor %}
+            <p>Nom du repas : {{c.details[0].repas.nom}}</p>
+            <p>Quantité : {{c.details[0].quantite}}</p>
+            <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
+            <p>Status de la livraison : {{c.status}} </p>
+            <p><a href="{{ path('commandeStatus', {'id': c.id}) }}"class="btn-retour">Modifier le status de la commande</a></p>
+            <hr><br>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
