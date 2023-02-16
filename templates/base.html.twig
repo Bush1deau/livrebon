@@ -70,7 +70,7 @@
 							<a class="nav-link" href="{{ path('restaurant') }}">Mes restaurants</a>
 						    </li>
                             <li class="nav-item">
-							<a class="nav-link" href="{{ path('repas') }}">Mes plats</a>
+							<a class="nav-link" href="{{ path('repasResto', {'id': app.user.restaurant.id }) }}">Mes plats</a>
 						    </li>
                             <li class="nav-item">
 							<a class="nav-link" href="{{ path('restaurantCmd') }}">Mes commandes</a>

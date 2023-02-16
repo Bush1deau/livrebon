@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RepasType;
 use App\Entity\Repas;
+use App\Entity\Restaurant;
 use App\Repository\RepasRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -15,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class RepasController extends AbstractController
 {
     /**
-     * @Route("/repas", name="repas")
+     * @Route("/repass", name="repas")
      * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function index(RepasRepository $repasRepository): Response
@@ -23,6 +24,17 @@ class RepasController extends AbstractController
         $repas = $repasRepository->findAll();
         return $this->render('repas/index.html.twig', [
             'repass' => $repas,
+        ]);
+    }
+
+    /**
+     * @Route("/repasResto/{id}", name="repasResto", methods={"GET", "POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
+     */
+    public function view(Restaurant $restaurant): Response
+    {
+        return $this->render('repas/index.html.twig', [
+            'restaurant' => $restaurant,
         ]);
     }
 

@@ -57,7 +57,7 @@ class Restaurant
     private $repas;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="restaurant", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="restaurant")
      */
     private $proprietaire;
 
