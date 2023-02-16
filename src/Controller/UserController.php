@@ -16,7 +16,6 @@ class UserController extends AbstractController
     public function viewCommande(CommandeRepository $commandeRepository): Response
     {
         $commande = $commandeRepository->findAll();
-        // $cmd = $commandeRepository->findCommand($id);
 
         return $this->render('user/commandes.html.twig', [
             'commande' => $commande

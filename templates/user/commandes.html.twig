@@ -1,21 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commande client{% endblock %}
+{% block title %}Commande{% endblock %}
+
+
 
 {% block body %}
     <link rel="stylesheet" href="/style/register.css">
     <div class="form_wrapper">
         <div class="form_container">
              <div class="centre">
-                <h1>Commande client</h1>
+
+                {% if is_granted("ROLE_CLIENT") %}
+                    <h1>Commande client</h1>
+                {% endif %}
+
+                {% if is_granted("ROLE_LIVREUR") %}
+                    <h1>Commande livreur</h1>
+                {% endif %}
+
                 {% for c in commande %}
-                <br>
-                <p>Nom du repas : {{c.details[0].repas.nom}}</p>
-                <p>Quantité : {{c.details[0].quantite}}</p>
-                <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
-                <p>Status de la livraison : {{c.status}} </p>
-                <hr> <br>
+                    <br>
+                    <p>Nom du repas : {{c.details[0].repas.nom}}</p>
+                    <p>Quantité : {{c.details[0].quantite}}</p>
+                    <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
+                    <p>Status de la livraison : {{c.status}} </p>
+
+                {% if is_granted("ROLE_LIVREUR") %}
+                    <p><a href="{{ path('commandesStatus', {'id': c.id}) }}"class="btn-retour">Modifier le status de la commande</a></p>
+                {% endif %}
+                    <br>
+                    <hr>
+
                 {% endfor %}
+
             </div>
         </div>
     </div>
