@@ -13,6 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\CommandeRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+
+
 class RestaurantController extends AbstractController
 {
     /**
@@ -114,5 +116,6 @@ class RestaurantController extends AbstractController
        ]);
     }
 
+    
 
 }
