@@ -10,6 +10,8 @@
     <p>Quantité : {{c.details[0].quantite}}</p>
     <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
     <p>Status de la livraison : {{c.status}} </p>
+    <p><a href="{{ path('commandeStatus', {'id': c.id}) }}"class="btn-retour">Modifier le status de la commande</a></p>
+    <br>
     
 
     {% endfor %}
