@@ -10,11 +10,13 @@ use App\Form\RepasType;
 use App\Entity\Repas;
 use App\Repository\RepasRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class RepasController extends AbstractController
 {
     /**
      * @Route("/repas", name="repas")
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function index(RepasRepository $repasRepository): Response
     {
@@ -26,6 +28,7 @@ class RepasController extends AbstractController
 
     /**
      * @Route("/repas/new", name="new-repas", methods={"GET", "POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function new(Request $request, RepasRepository $repasRepository, ManagerRegistry $doctrine): Response
     {
@@ -37,6 +40,7 @@ class RepasController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repasRepository->add($repas, true);
+            $repas->setRestaurant($this->getUser()->getRestaurant());
             $repas = $form->getData();
             $manager->persist($repas);
             $manager->flush();
@@ -51,6 +55,7 @@ class RepasController extends AbstractController
 
     /**
      * @Route("repas/{id}", name="id-repas", methods={"GET"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function show(Repas $repas): Response
     {
@@ -62,6 +67,7 @@ class RepasController extends AbstractController
 
     /**
      * @Route("repas/{id}/edit", name="edit_repas", methods={"GET", "POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function edit(Request $request, Repas $repas, RepasRepository $repasRepository): Response
     {
@@ -82,6 +88,7 @@ class RepasController extends AbstractController
 
     /**
      * @Route("repas/{id}", name="delete_repas", methods={"POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function delete(Request $request, Repas $repas, RepasRepository $repasRepository): Response
     {

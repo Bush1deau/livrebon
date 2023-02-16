@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande client{% endblock %}
+
+{% block body %}
+    <h1>Commande client</h1>
+    {% for c in commande %}
+
+    {{ dump(commande) }}
+
+    <p>Nom du repas : {{c.details[0].repas.nom}}</p>
+    <p>Quantité : {{c.details[0].quantite}}</p>
+    <p>Prix total : {{c.details[0].quantite * c.details[0].repas.tarif + 3}}</p>
+    <p>Status de la livraison : {{c.status}} </p>
+    <p>Adresse du client : {{c.user.adresse}} </p>
+    {# <p>Adresse du client : {{c.restaurant.adresse}} </p> #}
+    <br>
+    
+
+    {% endfor %}
+
+{% endblock %}
