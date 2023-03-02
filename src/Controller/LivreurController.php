@@ -14,25 +14,21 @@ use App\Repository\CommandeRepository;
 class LivreurController extends AbstractController
 {
     /**
-     * @Route("/livreur/{id<\d+>}", name="app_livreur")
+     * @Route("/livreur", name="app_livreur")
      * @IsGranted("ROLE_LIVREUR")
      */
-    public function index(int $id, UserRepository $userRepository, Request $request): Response
+    public function index(UserRepository $userRepository, Request $request): Response
     {
-        $profil = $userRepository->find($id);
         
-        $session = $request->getSession();
-        $session->set('user-last',$id);
-
-        return $this->render('livreur/index.html.twig', [
-            'profil' =>$profil,
-        ]);
+        return $this->render('livreur/index.html.twig');
     }
 
+
+
      /**
-     * @Route("/livcommandes", name="commandeLivreur")
+     * @Route("/commandes", name="commandeLivreur")
      */
-    public function viewCommandeLivreur(CommandeRepository $commandeRepository): Response
+    public function viewCommandelivreur(CommandeRepository $commandeRepository): Response
     {
         $commande = $commandeRepository->findAll();
 
