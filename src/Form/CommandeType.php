@@ -27,9 +27,14 @@ class CommandeType extends AbstractType
             'label' => 'quantite',
             'mapped' => false])
 
-            ->add('dateTime', DateTimeType::class,['attr'=> ['class' => Repas::class], 
+            ->add('dateTime', DateTimeType::class,['attr'=> ['class' => Repas::class  ], 
             'label' => 'dateTime',
-            'mapped' => false])
+            'mapped' => false,
+            'date_widget' => 'choice',
+            'years' => range(date('Y'), date('Y')+100),
+                 'months' => range(date('m'), 12),
+                 'days' => range(date('d'), 31),
+            'data' => new \DateTime()])
 
             ->add('lieu', TextType::class,['attr'=> [ 'class' => Repas::class], 
             'label' => 'lieu',

@@ -22,4 +22,6 @@ class UserController extends AbstractController
             'commande' => $commande
         ]);
     }
+
 }
+

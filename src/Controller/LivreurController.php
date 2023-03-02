@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\CommandeRepository;
 
 class LivreurController extends AbstractController
 {
@@ -28,7 +29,17 @@ class LivreurController extends AbstractController
         ]);
     }
 
-    
+     /**
+     * @Route("/livcommandes", name="commandeLivreur")
+     */
+    public function viewCommandeLivreur(CommandeRepository $commandeRepository): Response
+    {
+        $commande = $commandeRepository->findAll();
+
+        return $this->render('livreur/commandes.html.twig', [
+            'commande' => $commande
+        ]);
+    }
 
     
     
